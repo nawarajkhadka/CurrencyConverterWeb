@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+
+}
+
+
+<div ng-controller="ccontroller" ng-cloak>
+    <!--form section begins-->
+    <form ng-submit="search(currency)" name="ceForm">
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="source_d">Amount</label>
+                <input type="number" class="form-control" id="source_amt" ng-model="currency.amount" placeholder="Enter amount" required min="1">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="source_c">From</label>
+                <select class="form-control" id="source_c" ng-init="currency.sourcecurrency=  ddlItems[0].value" ng-model="currency.sourcecurrency" ng-options="o.name as o.value for o in ddlItems" required>
+                    <option value="">--SELECT--</option>
+                </select>
+
+            </div>
+            <div class="form-group col-md-2">
+                <label for="source_d">To</label>
+                <select class="form-control" id="source_d" ng-init="currency.destinationcurrency=  ddlItems[0].value" ng-model="currency.destinationcurrency" ng-options="o.name as o.value for o in ddlItems" required>
+                    <option value="">--SELECT--</option>
+                </select>
+
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="source_d">Date</label>
+                <input type="date" class="form-control" id="source_date" ng-model="currency.date" placeholder="Enter date" max="{{maxdate}}">
+            </div>
+            <div class="form-group col-md-2">
+                <br />
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </div>
+        </div>
+
+    </form>
+    <!--form section ends-->
+    <!--result section begins-->
+    <div class="row" ng-show="resultcurrency.amt&&!errorresponse.data">
+        <div class="col-md-4">
+            <p class="text-success">{{resultcurrency.srcamt}} {{resultcurrency.src}}={{resultcurrency.amt}} {{resultcurrency.dst}}</p>
+        </div>
+    </div>
+    <!--result section ends-->
+    <!--error section begins-->
+    <div class="row" ng-show="errorresponse.data">
+        <p class="text-danger">{{errorresponse.data}}</p>
+    </div>
+    <!--error section ends-->
+    <!--canvas section begins-->
+    <div ng-hide="errorresponse.data">
+        <canvas class="chart chart-line" chart-data="data" chart-labels="labels"
+                chart-click="onClick"></canvas>
+    </div>
+    <!--canvas section ends-->
+</div>
+<!--loader div begins-->
+<div class="text-center" ng-show="loading">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!--loader div ends-->
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+    <script src="~/lib/AngularControllers/currencyController.js"></script>
+
+}

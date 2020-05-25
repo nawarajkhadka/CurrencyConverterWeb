@@ -1,7 +1,11 @@
 USE [master]
 GO
 
-/****** Object:  Database [CurrencyConverter]    Script Date: 5/20/2020 12:59:08 PM ******/
+/****** Object:  Database [CurrencyConverter]    Script Date: 5/25/2020 12:30:14 PM ******/
+DROP DATABASE [CurrencyConverter]
+GO
+
+/****** Object:  Database [CurrencyConverter]    Script Date: 5/25/2020 12:30:14 PM ******/
 CREATE DATABASE [CurrencyConverter]
  CONTAINMENT = NONE
  ON  PRIMARY 
